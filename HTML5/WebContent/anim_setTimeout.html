@@ -1,0 +1,71 @@
+
+<!-- 오른쪽으로 뛰어가는 치타  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript">
+	var canvas = null;
+	var img = null;
+	var ctx = null;
+	var imageReady = false;
+	var frame = 0;
+	var frame1 = 0;
+
+	window.onresize = resize; //an event handler for the resize event on the window. 
+	//if you resizing the browser the rectangles will follow along nicely. 
+
+	function onload() {
+		canvas = document.getElementById('gameCanvas');
+		ctx = canvas.getContext("2d");
+		img = new Image();
+		img.src = 'http://buildnewgames.com/assets/article/sprite-animation/simba.png';
+		img.onload = loaded();
+		resize(); //for resizing of the canvas if the browser windows is resized by the user. 
+	}
+
+	function loaded() {
+		imageReady = true;
+		//To make sure we only start cycling the animation after the image has loaded, 
+		//put the call in the loaded function
+		update();
+	}
+
+	function update() {
+		redraw();
+		frame++;
+		frame1++;
+		if (frame >= 6)
+			frame = 0;
+		if ((frame1 * 30)>canvas.width)
+			frame1 = 0;
+		setTimeout(update, 1000/10)
+		//Add an interval timer with a cycle time equivalent to 60 
+		//frames per second (1000ms divided by 60). 
+	}
+
+	function resize() {
+		canvas.width = canvas.parentNode.clientWidth; //for taking up the complete area of the brwser window
+		canvas.height = canvas.parentNode.clientHeight; //for taking up the complete area of the brwser windo
+		redraw();
+	}
+	
+	function redraw() {
+		ctx.fillStyle = '#000000';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		if (imageReady) {
+			ctx.drawImage(img, frame*96, 0, 95, 54, frame1*30,
+					canvas.height / 2 - (48), 95, 54);
+		}
+	}
+</script>
+</head>
+<body onload='onload()'
+	style='position: absolute; padding: 0; margin: 0; height: 100%; width: 100%'>
+
+	<canvas id="gameCanvas"></canvas>
+
+</body>
+</html>

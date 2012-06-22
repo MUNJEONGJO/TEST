@@ -1,0 +1,78 @@
+<!-- -90도 회전한 치타  -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript">
+	var canvas = null;
+	var img = null;
+	var ctx = null;
+	var imageReady = false;
+	window.requestAnimFrame = (function() {
+		return window.requestAnimationFrame
+				|| window.webkitRequestAnimationFrame
+				|| window.mozRequestAnimationFrame
+				|| window.oRequestAnimationFrame
+				|| window.msRequestAnimationFrame || function(callback) {
+					window.setTimeout(callback, 1000 / 60);
+				};
+	})();
+	function onload() {
+		canvas = document.getElementById('gameCanvas');
+		ctx = canvas.getContext("2d");
+		img = new Image();
+		img.src = 'http://buildnewgames.com/assets/article/sprite-animation/simba.png';
+		img.onload = loaded();
+		resize();
+	}
+	function loaded() {
+		imageReady = true;
+		setTimeout(update, 1000 / 60);
+	}
+	function resize() {
+		canvas.width = canvas.parentNode.clientWidth;
+		canvas.height = canvas.parentNode.clientHeight;
+		redraw();
+	}
+	function redraw() {
+		ctx.fillStyle = '#000000';
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		if (imageReady) {
+			ctx.save();
+			ctx.rotate(270 * Math.PI / 180);
+			ctx.drawImage(img, frame * 96, 0, 96, 54, -96, 48, 96, 54);
+			ctx.restore();
+		}
+	}
+
+	var frame = 0;
+	var lastUpdateTime = 0;
+	var acDelta = 0;
+	var msPerFrame = 100;
+
+	function update() {
+		requestAnimFrame(update);
+
+		var delta = Date.now() - lastUpdateTime;
+		if (acDelta > msPerFrame) {
+			acDelta = 0;
+			redraw();
+			frame++;
+			if (frame >= 6)
+				frame = 0;
+		} else {
+			acDelta += delta;
+		}
+
+		lastUpdateTime = Date.now();
+	}
+</script>
+</head>
+<body onload='onload()'
+	style='position: absolute; padding: 0; margin: 0; height: 100%; width: 100%'>
+
+	<canvas id="gameCanvas"></canvas>
+
+</body>
+</html>
