@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script>
+//참고 사이트 : http://www.smashious.com/an-introduction-to-html5-canvas/473/
+
+	var canvas1 = null;
+	var canvas2 = null;
+	var context = null;
+	var ctx = null;
+	var num1 = 0;
+	var num2 = 0;
+	var set_time = 0;
+	var func_name;
+	var number = 0;
+	var b = 0;
+
+	window.onload = function() {
+		canvas1 = document.getElementById("myCanvas1");
+		canvas2 = document.getElementById("myCanvas2");
+		context = canvas1.getContext("2d");
+		ctx = canvas2.getContext("2d");
+
+		context.beginPath();
+		context.lineWidth = 5;
+		context.strokeStyle = "black";
+
+		func_name = bigcircle;
+		func_call(func_name);
+		
+		ctx.beginPath();
+		ctx.lineWidth = 2;
+		ctx.fillStyle = "rgb(200, 50, 50)";
+						
+	}
+	
+	//var c = "";
+	function heart(){ //하드 
+		b = b + 1;
+		ctx.clearRect(0, 0, 5000, 5000);
+		ctx.beginPath();
+		ctx.lineWidth = 2;
+		var number1 = -1 * number;
+		var number2 = 300 + number;
+		
+		//var uu = document.getElementById("bb");
+		//c = c +"" + b + "number:"+number1+"||";
+		//uu.innerHTML = c + "</ br>";
+				
+		ctx.moveTo(150,80);
+		ctx.bezierCurveTo(70,1,number1,100,150,200);
+		//bezierCurve의 1,2번째인자는 첫번째 control point의 좌표이고
+		//3,4번째 인자는 두번째 control point의 좌표이고
+		//5,6번째 인자는 마지막 점의 좌표이다. 
+		ctx.moveTo(150,80);
+		ctx.bezierCurveTo(230,1,number2,100,150,200);
+
+		ctx.fill();
+		
+	    if (b<=3){
+	    	number = number + 5;
+	    }else{
+	    	number = number - 5;
+	    }
+	    
+	    if (b>=6){
+	    	b = 0;
+	    }
+		
+	}
+
+	
+	function func_call(fname) {
+		var name = fname;
+		set_time = setInterval(name, 1000/10)//0.05초 간격으로 변수 fname에 담긴 함수를 호출한다. 
+	}
+
+	function bigcircle() {
+		num2 = num1 + 0.1;
+
+		if (num1 <= 2) {
+			context.arc(150, 150, 100, Math.PI * num1, Math.PI * num2, false);
+			//context.arc(x, y, radius, startAngle, endAngle, counterClockwise); 
+			context.stroke();
+			//각도를 Math.PI*0.1씩 변경하며 시계방향으로 그린다.
+		}
+		if (num1 > 2) {
+			clearInterval(set_time);
+			num1 = 0;
+			num2 = 0;
+			lefteye();
+			//Math.PI*2는 360도이기 때문에, num2가 2를 초과하면 bigcircle함수 호출을 중지한다. 
+		}
+		num1 = num2;
+	}
+
+	function lefteye() {//왼쪽 눈 
+		context.moveTo(130, 130);
+		context.arc(120, 130, 10, 0, Math.PI * 2, true);
+		context.stroke();
+		righteye();
+	}
+
+	function righteye() {//오른쪽 눈 
+		context.moveTo(190, 130);
+		context.arc(180, 130, 10, 0, Math.PI * 2, true);
+		context.stroke();
+		context.moveTo(220, 150);
+		func_name = mouth;
+		func_call(func_name);//입을 그릴 함수를 호출한다. 
+	}
+
+	function mouth() {
+		num2 = num1 + 0.1;
+
+		if (num2 <= 1) {
+			context.arc(150, 150, 70, Math.PI * num1, Math.PI * num2, false);
+			context.stroke();
+			//180도의 호만 그리면 되기 때문에 
+			//num2를 1까지 0.1씩 변경시키며 그린다
+		}
+		if (num2 > 1) {
+			clearInterval(set_time);
+			func_name = heart;
+			func_call(func_name);
+			context.endPath();
+			//num2가 1을 초과하면 함수 호출을 중지한다. 
+		}
+		num1 = num2;
+	}
+	
+</script>
+</head>
+<body>
+	<div style="float: left; "><canvas id="myCanvas1" width="300" height="500" ></canvas></div>
+	<div Style="float: left; padding-top: 20px;"><canvas id="myCanvas2" width="500" height="500" ></canvas></div>
+	<div id="bb"></div>
+</body>
+</html>
