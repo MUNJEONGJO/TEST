@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="development-bundle/jquery-1.7.2.js"></script>
+<script src="development-bundle/ui/jquery.effects.core.js"></script>
+<script src="development-bundle/ui/jquery.effects.blind.js"></script>
+<script src="development-bundle/ui/jquery.effects.bounce.js"></script>
+<script src="development-bundle/ui/jquery.effects.clip.js"></script>
+<script src="development-bundle/ui/jquery.effects.drop.js"></script>
+<script src="development-bundle/ui/jquery.effects.explode.js"></script>
+<script src="development-bundle/ui/jquery.effects.fold.js"></script>
+<script src="development-bundle/ui/jquery.effects.highlight.js"></script>
+<script src="development-bundle/ui/jquery.effects.pulsate.js"></script>
+<script src="development-bundle/ui/jquery.effects.scale.js"></script>
+<script src="development-bundle/ui/jquery.effects.shake.js"></script>
+<script src="development-bundle./ui/jquery.effects.slide.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		function runEffect(name) {
+			var selectedEffect = name;//효과이름을 변수에 저장한다. 
+
+			// most effect types need no options passed by default
+			// 대부분의 효과들은 옵션을 지정해 주지 않아도 default값으로 실행된다. 
+			var options = {};
+			// some effects have required parameters
+			if (selectedEffect === "blind") {//blind효과인 경우 direction을 지정해 준다. 
+				options = {
+					direction : "vertical"
+				};
+			} else if (selectedEffect === "bounce") {
+				options = {
+					direction : "up",//바운스의 방향을 설정한다. 
+					distance : 140,//첫 번째 바운스의 거리를 픽셀 단위로 설정한다. 
+					times : 5//바운스의 횟수를 설정한다. 
+				};
+			} else if (selectedEffect === "size") {
+				options = {
+					to : {
+						width : 200,
+						height : 60
+					}
+				};
+			}
+			
+			//선택된 효과와 함께 토글 이벤트를 부여합니다. 
+			$("#effect").toggle(selectedEffect, options, 500, callback);
+		}
+
+		// callback function to bring a spiderman back
+		function callback() {
+			setTimeout(function() {
+				$("#effect").removeAttr("style").hide().fadeIn();
+			}, 1000);
+		}
+		;
+
+		$("#button").click(function() { //id가 button인 태크를 클릭하면 실행된다. 
+			var name = $("#effectTypes").val();//선택된 효과이름을 가져온다. 
+			runEffect(name);//효과를 실행하는 함수를 호출한다. 
+		});
+	});
+</script>
+<style>
+#effect {
+	background-image: url(img/cartoon/spiderman.jpg);
+	background-repeat: no-repeat;
+	height: 400px;
+	width: 500px;
+}
+</style>
+</head>
+<body>
+	<div>
+		<div id="effect"></div>
+		<select name="effects" id="effectTypes">
+			<option value="blind">Blind</option>
+			<option value="bounce">Bounce</option>
+			<option value="clip">Clip</option>
+			<option value="drop">Drop</option>
+			<option value="explode">Explode</option>
+			<option value="fold">Fold</option>
+			<option value="highlight">Highlight</option>
+			<option value="puff">Puff</option>
+			<option value="pulsate">Pulsate</option>
+			<option value="scale">Scale</option>
+			<option value="shake">Shake</option>
+			<option value="size">Size</option>
+			<option value="slide">Slide</option>
+		</select> <a href="#" id="button">RunEffect</a>
+	</div>
+</body>
+</html>
