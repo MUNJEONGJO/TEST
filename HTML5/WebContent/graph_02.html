@@ -1,0 +1,92 @@
+<!-- HTML을 막대그래프로 바꾸기 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/excanvas.js"></script>
+
+<!-- 이 예는 IE에서는 지원을 하지 않는다.
+IE에서 캔버스를 사용하려면
+http://code.google.com/p/explorercanvas/  
+에서 ExplorerCanvas js파일을 다운로드 해서 소스에 포함시킨다.
+<script type="text/javascript" src="js/excanvas.js"></script>  -->
+
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/rgraph/RGraph.common.core.js"></script>
+<script type="text/javascript" src="js/rgraph/RGraph.bar.js"></script>
+<!-- 막대그래프를 쓸 거니까, RGraph Bar graph 라이브러리와 RGraph 라이브러리 모두 필요하다
+또한 JQuery를 써서 데이터를 마크업에서 추출한다.
+그래프를 그리려면 그래프의 제목, 레이블, 데이터를 HTML에서 추출해서 RGraph 라이브러리로 전달해야 한다. 
+RGraph는 레이블과 데이터를 배열 형태로 받는다. jQuery를 이용해서 배열을 쉽게 만들 수 있다.  -->
+<script type="text/javascript">
+
+	function draw(){
+		var canvas = document.getElementById("browsers");
+		
+		if (canvas.getContext) {
+			//canvas엘리먼트에는 그림 그리는데 필요한 기능을 가진 getContext라는 DOM메소드가 존재한다. 
+			//getContext메소드를 확인하는 것으로 간단하게 현재 브라우저가 CANVAS를 지원하는 지 아닌지 여부를 
+			//판단할 수 있다. 
+			$("#graph_data").hide();
+			canvasGraph();
+		}	
+	}
+	
+	function canvasGraph(){
+		var title = $("#graph_data h1").text();
+		//제목에 쓸 텍스트 추출
+		var labels = $("#graph_data>ul>li>p[data-name]").map(function (){
+			return $(this).attr("data-name");
+		});
+		//data-name속성이 있는 요소를 전부 선택, data-name 속성의 값을 배열로 바꾸기 위해
+		//jQuery의 map메소드를 사용 
+		var percents = $("#graph_data>ul>li>p[data-percent]").map(function (){
+			return parseInt($(this).attr("data-percent"));
+		});
+		
+		//alert(percents);
+		
+		var bar = new RGraph.Bar("browsers", percents);
+		bar.Set("chart.gutter", 50);
+		bar.Set("chart.colors", ["red"]);
+		bar.Set("chart.title", title);
+		bar.Set("chart.labels", labels);
+		bar.Draw();
+		//이 example에서는 jQuery로 요소를 만들면서 바로 스타일을 적용하고 있다. 
+		//하지만 실무에 쓸 대는, 레이블 색깔, 그래프 색깔 같은 스타일 정보는 별도의 
+		//스타일시트로 분리하는 것이 옳다. 
+	}
+</script>
+</head>
+<body onload="draw();">
+	<h2>Browser support</h2>
+	<!-- START: canvas -->
+	<canvas id="browsers" width="700" height="250"></canvas>
+	<!-- END: canvas -->
+	<div id="graph_data">
+		<h1>Browser share for this site</h1>
+		<ul>
+			<li>
+				<p data-name="Safari 4" data-percent="15">
+					<!-- HTML5의 커스텀 데이터 속성을 이용해서 브라우저 이름과 점유율을 저장했다. 물론 
+				텍스트에도 똑같은 정보가 들어 있지만, 이렇게 하면 텍스트를 분석할 필요가 없으므로 
+				훨씬 편하다. -->
+					Safari 4 - 15%
+				</p>
+			</li>
+			<li>
+				<p data-name="Internet Explorer" data-percent="55">Internet
+					Explorer - 55%</p>
+			</li>
+			<li>
+				<p data-name="Firefox" data-percent="14">Firefox - 14%</p>
+			</li>
+			<li>
+				<p data-name="Google Chrome" data-percent="16">Google Chrome -
+					16%</p>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

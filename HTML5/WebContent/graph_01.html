@@ -1,0 +1,80 @@
+
+<!-- 웹 페이지에 그래프를 그릴 수 있는 방법은 아주 많다. 개발자들은 보통 플래시를 쓰지만, 플래시는 아이폰이나 아이패드에서 볼 수가 없다. 서버 쪽에서 처리할 수도 있지만, 데이터를 실시간으로 처리하려면 프로세서에 부담이 너무 크다. 캔버스 같은, 표준 클라이언트 측 해결책을 쓰면서 오래된 브라우저에서도 볼 수 있게 해주는 방법이 가장 좋다. 우리는 간단한 도형을 그리는 방법을 이미 알고 있지만, 복잡한 그래프를 그리려면 자바스크립트 코드가 너무 복잡해진다. 이런 작업을 도와줄 라이브러리가 필요하다.
+ 
+Rgraph 라이브러리를 이용하면 캔버스에서 쉽게 그래프를 그릴 수 있다. Rgraph는 순수한 자바스크립트 라이브러리이다.
+ 
+www.rgraph.net 에서 라이브러리 다운로드
+Include the libraries(put this in your documents <HEAD>)
+<script src="RGraph.common.core.js"></script>
+<script src="RGraph.common.annotate.js"></script>   Just needed for annotating 
+<script src="RGraph.common.context.js"></script>    Just needed for context menus 
+<script src="RGraph.common.effects.js"></script>    Just needed for visual effects 
+<script src="RGraph.common.key.js"></script>   	< Just needed for keys 
+<script src="RGraph.common.resizing.js"></script>  <!-- Just needed for resizing 
+<script src="RGraph.common.tooltips.js"></script>  <!-- Just needed for tooltips 
+<script src="RGraph.common.zoom.js"></script>  	<!-- Just needed for zoom 
+<script src="RGraph.bar.js"></script>          	<!-- Just needed for Bar charts 
+<script src="RGraph.bipolar.js"></script>      	<!-- Just needed for Bi-polar charts 
+<script src="RGraph.cornergauge.js"></script>  	<!-- Just needed for CornerGauge charts 
+<script src="RGraph.fuel.js"></script>         	<!-- Just needed for Fuel charts 
+<script src="RGraph.funnel.js"></script>       	<!-- Just needed for Funnel charts 
+<script src="RGraph.gantt.js"></script>        	<!-- Just needed for Gantt charts 
+<script src="RGraph.gauge.js"></script>        	<!-- Just needed for Gauge charts 
+<script src="RGraph.hbar.js"></script>         	<!-- Just needed for Horizontal Bar charts 
+<script src="RGraph.hprogress.js"></script>    	<!-- Just needed for Porizontal Progress bars 
+<script src="RGraph.led.js"></script>          	<!-- Just needed for LED charts 
+<script src="RGraph.line.js"></script>         	<!-- Just needed for Line charts 
+<script src="RGraph.meter.js"></script>        	<!-- Just needed for Meter charts 
+<script src="RGraph.odo.js"></script>          	<!-- Just needed for Odometers 
+<script src="RGraph.pie.js"></script>          	<!-- Just needed for Pie AND Donut charts 
+<script src="RGraph.radar.js"></script>        	<!-- Just needed for Radar charts 
+<script src="RGraph.rose.js"></script>         	<!-- Just needed for Rose charts 
+<script src="RGraph.rscatter.js"></script>     	<!-- Just needed for Rscatter charts 
+<script src="RGraph.scatter.js"></script>      	<!-- Just needed for Scatter charts 
+<script src="RGraph.thermometer.js"></script>  	<!-- Just needed for Thermometer charts 
+<script src="RGraph.vprogress.js"></script>    	<!-- Just needed for Vertical Progress bars 
+<script src="RGraph.waterfall.js"></script>    	<!-- Just needed for Waterfall charts  
+ 
+원본 위치 <http://www.rgraph.net/docs/starting-with-rgraph.html#structure>
+ 
+     3. Add the canvas tag (put it where you want the chart to appear)
+<canvas id="myCanvas" width="600" height="250">[No canvas support]</canvas>
+ 
+     4. Create the chart (since it is using the onload event, you can put this anywhere)
+<script>
+	window.onload = function ()
+	{
+    	var data = [280, 45, 133, 166, 84, 259, 266, 960, 219, 311, 67, 89];
+var bar = new RGraph.Bar('myCanvas', data);
+    	bar.Set('chart.labels', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+    	bar.Set('chart.gutter.left', 35);
+    	bar.Draw();
+	}
+</script>
+ 
+ 
+     5. 합치면 아래와 같이 된다. -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/rgraph/RGraph.common.core.js"></script>
+<script type="text/javascript" src="js/rgraph/RGraph.bar.js"></script>
+<script>
+	window.onload = function() {
+		var bar = new RGraph.Bar('myBar', [ 12, 13, 16, 15, 16, 19, 19, 12, 23,
+				16, 13, 24 ]);
+		bar.Set('chart.gutter.left', 35);
+		bar.Set('chart.colors', [ 'red' ]);
+		bar.Set('chart.title', 'A basic chart');
+		bar.Set('chart.labels', [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+				'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]);
+		bar.Draw();
+	}
+</script>
+</head>
+<body>
+	<canvas id="myBar" width="1000" height="250">[No canvas support]</canvas>
+</body>
+</html>
