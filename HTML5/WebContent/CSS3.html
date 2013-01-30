@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style>
+#conference{
+	background-color: #000;
+	width: 960px;
+	height: 240px;
+	float: left;
+	background-image: url("images/zebra-stripes-400980-xl.jpg");
+	background-position: center;
+	margin-top: 20px;
+}
+
+#badge, #info{
+	float: left;
+	background-color: #fff;
+}
+
+#badge{
+	text-align: center;
+	width: 200px;
+	border: 2px solid blue;
+	background: -moz-linear-gradient(top,#fff,#ccc);
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	box-shadow: 5px 5px 5px #333;
+	transform: rotate(-7.5deg);
+	-moz-transform: rotate(-7.5deg);
+	-o-transform: rotate(-7.5deg);
+	-webkit-transform: rotate(-7.5deg);
+	-ms-transform: rotate(-7.5deg);
+}
+
+
+#info{
+	margin: 20px;
+	padding: 20px;
+	width: 660px;
+	height: 160px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 12px;
+}
+
+#badge h2{
+	margin: 0;
+	color: red;
+	font-size: 40px;
+}
+
+#badge h3{
+	margin: 0;
+	background-color: blue;
+	color: #fff;
+}
+</style>
+</head>
+<body>
+	<div id="conference">
+		<section id="badge">
+			<h3>Hi, My Name Is</h3>
+			<h2>Barney</h2>
+		</section>
+		<section id="info"></section>
+	</div>
+</body>
+</html>

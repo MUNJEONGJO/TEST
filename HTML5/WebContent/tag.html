@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style>
+body {
+	width: 960px;
+	margin: 15px auto;
+	font-family: Arial, "MS Trebuchet", sans-serif
+}
+
+p {
+	margin: 0 0 20px 0;
+}
+
+header #page_header {
+	width: 100%;
+}
+
+header #page_header nav ul,#page_footer nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#page_header nav ul li,#page_footer nav ul li {
+	padding: 0;
+	margin: 0 20px 0 0;
+	display: inline;
+}
+
+section#posts {
+	float: left;
+	width: 74%;
+}
+
+section#posts aside {
+	float: right;
+	width: 35%;
+	margin-left: 5%;
+	font-size: 20px;
+	line-height: 40px;
+}
+
+section#sidebar {
+	float: left;
+	width: 25%;
+}
+
+footer#page_footer {
+	clear: both;
+	width: 100%;
+	display: block;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<header id="page_header">
+		<h1>AwesomeCo Blog!</h1>
+		<nav>
+			<!-- 헤더나 푸터와 마찬가지로, 페이지에 여러 개의 내비게이션 절을 넣을 수 있다. 
+		내비게이션은 보통 헤더나 푸터에 두어서 바로 알아볼 수 있도록 하는 것이 일반적이다.  -->
+			<ul>
+				<li><a href="/">최근 글</a></li>
+				<li><a href="archives">이전 글</a></li>
+				<li><a href="contributors">공헌자들</a></li>
+				<li><a href="contact">연락처</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section id="posts">
+		<!-- aside 요소를 article 안에 넣어서, 관련된 내용과 가까이 있게 한다. 
+	이렇게 해서 섹션 하나를 완성한다.  -->
+		<article class="post">
+			<header>
+				<h2>How Many Should We Put You Down For?</h2>
+				<p>
+					Posted by Brian on
+					<time datetime="2010-10-01T14:39">2010. 10. 1 2:39PM</time>
+				</p>
+			</header>
+			<aside>
+				<!-- 주된 내용에 뭔가를 추가해야 할 경우, 인용구, 다이어그램, 덧붙이고 싶은 생각, 관련된 링크 같은 것을 aside요소를 
+			사용해서 이러한 것을 나타낼 수 있다. -->
+				<p>"물건을 팔 때는 거절할 기회를 주어선 안 됩니다."</p>
+			</aside>
+			<p>물건을 팔 때의 원칙은, 고객이 빈손으로 돌아가게 만들면 이미 글렀다 는 겁니다. 다시 오려고 하지
+				않을테니까요. 따라서 고객을 대할 때는 적극적인 자세를 취해야 합니다. 그렇다고 너무 오버하면 고객이 겁을 먹 고 돌아가
+				버릴 수도 있으니 조심해야 합니다.</p>
+			<p>대화가 끊어지지 않게 이어 나가는 한 가지 요령을 알아드리죠. 네, 아뇨 라고 대답할 수 잇는 질문을 피하라는
+				겁니다. 예를 들어, 서비스 플랜을 판매중이라면, 절대 3년 서비스 플랜과 5년 서비스 플랜이 있는데, 들어 보시겠습니까?
+			</p>
+			<footer>
+				<p>
+					<a href="comments"><i>25 Comments</i></a>
+				</p>
+			</footer>
+		</article>
+	</section>
+	<section id="sidebar">
+		<nav>
+			<h3>이전 글</h3>
+			<ul>
+				<li><a href="2010/10">2010년 10월</a></li>
+				<li><a href="2010/9">2010년 9월</a></li>
+				<li><a href="2010/8">2010년 8월</a></li>
+				<li><a href="2010/7">2010년 7월</a></li>
+				<li><a href="2010/6">2010년 6월</a></li>
+				<li><a href="2010/5">2010년 5월</a></li>
+				<li><a href="2010/4">2010년 4월</a></li>
+				<li><a href="2010/3">2010년 3월</a></li>
+				<li><a href="2010/2">2010년 2월</a></li>
+				<li><a href="2010/1">2010년 1월</a></li>
+			</ul>
+		</nav>
+	</section>
+
+	<footer id="page_footer">
+		<p>&copy; 2012 AwesomecO.</p>
+		<nav>
+			<ul>
+				<li><a href="http://awesome.com/">홈페이지</a></li>
+				<li><a href="about">회사소개</a></li>
+				<li><a href="terms.html">서비스 항목</a></li>
+				<li><a href="privacy.html">개인정보 보호 정책</a></li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+</html>

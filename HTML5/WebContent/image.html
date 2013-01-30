@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#image").load(function() {
+			var canvas, context, image, w, h, phase = 0;
+
+			image = $("#image")[0];
+			
+			w = image.width;
+            h = image.height;
+            alert(Math.sin(Math.PI/2));
+			canvas = $("#canvas")[0];
+			context = canvas.getContext("2d");
+			
+			setInterval(function () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(image, 50, 50, w + Math.sin(1) * 50, h + Math.cos(0) * 50);
+                //drawImage( imageResource, dx, dy, dw, dh )
+                phase += 0.01;
+            }, 1000/30);
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<div>
+		<canvas id="canvas" width="400" height="400" />
+	</div>
+	<div>
+		<img id="image" src="images/green.png" />
+	</div>
+</body>
+</html>

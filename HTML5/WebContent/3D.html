@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/wirelib.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		var wl = new Wirelib($('#canvas1')[0]);
+		wl.clearCanvas = false;
+		wl.lineWidth = '1.5';
+		wl.strokeStyle = '#ff0000'; //CREATE A RED LINE. 
+		wl.addLine(0, 0, 0, -200, -200, -200);
+		wl.addLine(-200, -200, -200, -200, -200, 200);
+		wl.addLine(0, 0, 0, -200, -200, 200);
+		wl.strokeStyle = '#056796'; //CREATE A RED LINE. 
+		wl.addLine(0, 0, 0, 200, 200, -200);
+		wl.addLine(200, 200, -200, 200, 200, 200);
+		wl.addLine(0, 0, 0, 200, 200, 200);
+
+		var wl2 = new Wirelib($('#canvas1')[0]);
+		
+		var wl3 = new Wirelib($('#canvas2')[0]);
+		wl3.clearCanvas = false;
+		wl3.lineWidth = '1.5';
+		wl3.strokeStyle = '#ff0000'; //CREATE A RED LINE. 
+		wl3.addCircle(0, 0, 0, 100, 32); //x, y, z, radius, segments
+		
+		var wl4 = new Wirelib($('#canvas2')[0]);
+		
+		var wl5 = new Wirelib($('#canvas3')[0]);
+		wl5.clearCanvas = false;
+		wl5.lineWidth = '1.5';
+		wl5.strokeStyle = '#ff0000'; //CREATE A RED LINE. 
+		wl5.addRect(0, 0, 0, 300, 300); //x, y, z, w, h
+		
+		var wl6 = new Wirelib($('#canvas3')[0]);
+
+		wl.loop(24, function() {
+			wl.rotateY(0.05);
+			wl.rotateX(0.02);
+			wl2.draw();
+
+		});
+		
+		wl3.loop(24, function() {
+			
+			wl3.rotateY(0.05);
+			wl3.rotateX(0.02);
+			wl4.draw();
+
+		});
+		
+		wl5.loop(24, function() {
+			
+			wl5.rotateY(0.05);
+			wl5.rotateX(0.02);
+			wl6.draw();
+
+		});
+		
+	});
+</script>
+</head>
+<body>
+	<div>
+		addLine()
+		<canvas style="background-color: #cccccc;" id="canvas1" width="600"
+			height="400"></canvas>
+	</div>
+	<div>
+		addCircle()
+		<canvas style="background-color: #cccccc;" id="canvas2" width="600"
+			height="400"></canvas>
+	</div>
+	<div>
+		addRect()
+		<canvas style="background-color: #cccccc;" id="canvas3" width="600"
+			height="400"></canvas>
+	</div>
+</body>
+</html>
